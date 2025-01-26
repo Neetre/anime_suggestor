@@ -1,0 +1,39 @@
+
+'''
+    elif page == "User Recommendations":
+        st.header("Personalized Recommendations")
+        
+        user_id = st.number_input("Enter User ID", min_value=1, step=1)
+        recommendation_method = st.selectbox("Recommendation Method", ["SVD", "User-Based"])
+        
+        if st.button("Get Recommendations"):
+            method = "svd" if recommendation_method == "SVD" else "user_based"
+            recommendations = fetch_data(f"/recommendations/{user_id}?method={method}")
+            
+            if recommendations:
+                display_anime_list(recommendations)
+
+    elif page == "Add User Ratings":
+        st.header("Add User Ratings")
+        
+        user_id = st.number_input("User ID", min_value=1, step=1)
+
+        num_ratings = st.number_input("Number of Anime to Rate", min_value=1, max_value=10, step=1)
+        
+        ratings = []
+        for i in range(num_ratings):
+            col1, col2 = st.columns(2)
+            with col1:
+                anime_id = st.number_input(f"Anime ID {i+1}", min_value=1, step=1, key=f"anime_id_{i}")
+            with col2:
+                rating = st.slider(f"Rating {i+1}", 1, 10, 5, key=f"rating_{i}")
+            
+            ratings.append({"anime_id": anime_id, "rating": rating})
+        
+        if st.button("Submit Ratings"):
+            data = {"user_id": user_id, "ratings": ratings}
+            result = fetch_data("/add-user-ratings", method='post', data=data)
+            
+            if result:
+                st.success("User ratings added successfully!")
+    '''

@@ -12,6 +12,8 @@ The dataset contains information about anime such as the name, genre, rating, et
 The dataset is not included in the repository. You can download it from the link above.
 Also, for now the suggestor only suggests anime based on the dataset. In the future, I plan to add more features to the suggestor, like suggesting anime based on the user's rating, etc. So I will be adding a login system to the suggestor, in order to store the user's rating.
 
+![anime_suggestor](https://cloud-cv7ae9o04-hack-club-bot.vercel.app/0image.png)
+
 ## Requirements
 
 - Python 3.9 or higher
