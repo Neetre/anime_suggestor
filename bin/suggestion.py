@@ -289,7 +289,9 @@ class AnimeRecommender:
         
         return selected_anime
 
+
 recommender = AnimeRecommender('../data/anime.csv', '../data/rating.csv')
+
 
 def new_user():
     recommender.preprocess_data()

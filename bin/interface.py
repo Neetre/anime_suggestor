@@ -22,6 +22,7 @@ def fetch_data(endpoint, method='get', data=None):
         st.error(f"Error: {e}")
         return None
 
+
 def display_anime_list(anime_list):
     """Display anime list in a formatted manner."""
     for anime in anime_list:
@@ -38,8 +39,8 @@ def main():
         "Genres & Types", 
         "Starter Anime", 
         "Initial Recommendations", 
-        "User Recommendations",
-        "Add User Ratings"
+        # "User Recommendations",
+        # "Add User Ratings"
     ])
 
     if page == "Genres & Types":
@@ -89,7 +90,7 @@ def main():
             
             if recommendations:
                 display_anime_list(recommendations)
-
+    '''
     elif page == "User Recommendations":
         st.header("Personalized Recommendations")
         
@@ -126,6 +127,7 @@ def main():
             
             if result:
                 st.success("User ratings added successfully!")
+    '''
 
 if __name__ == "__main__":
     main()
