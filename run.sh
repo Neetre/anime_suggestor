@@ -19,7 +19,6 @@ fi
 cd bin
 
 echo "Starting Python API..."
-cd api
 uvicorn api:app --host 0.0.0.0 --port 8006 &
 
 sleep 3

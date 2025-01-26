@@ -57,7 +57,7 @@ def load_hf_to_csv(repo_id, token):
                 api.download_file(
                     repo_id=repo_id,
                     filename=file["filename"],
-                    path="./",
+                    path="../data/",
                     token=token
                 )
                 print(f"Successfully downloaded {file['filename']}")
