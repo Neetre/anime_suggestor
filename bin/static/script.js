@@ -1,10 +1,11 @@
+BASE_URL = 'http://an.figliolo.it';
+
 document.addEventListener('DOMContentLoaded', function () {
     const pageSelector = document.getElementById('page-selector');
     const pages = document.querySelectorAll('.page');
 
-    // Function to fetch and display genres
     function fetchAndDisplayGenres() {
-        fetch('http://localhost:8000/genres')
+        fetch(BASE_URL + '/genres')
             .then(response => response.json())
             .then(data => {
                 const genresList = document.getElementById('genres-list');
@@ -15,9 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // Function to fetch and display types
     function fetchAndDisplayTypes() {
-        fetch('http://localhost:8000/types')
+        fetch(BASE_URL + '/types')
             .then(response => response.json())
             .then(data => {
                 const typesList = document.getElementById('types-list');
@@ -28,11 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // Fetch and display genres and types when the page loads
     fetchAndDisplayGenres();
     fetchAndDisplayTypes();
 
-    // Handle page selector change
     pageSelector.addEventListener('change', function () {
         pages.forEach(page => page.style.display = 'none');
         const selectedPage = document.getElementById(this.value);
@@ -41,8 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Fetch and display starter anime
-    fetch('http://localhost:8000/starter-anime')
+    fetch(BASE_URL + '/starter-anime')
         .then(response => response.json())
         .then(data => {
             const starterAnimeList = document.getElementById('starter-anime-list');
@@ -61,8 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching starter anime:', error);
         });
 
-    // Populate favorite genres and preferred types
-    fetch('http://localhost:8000/genres')
+    fetch(BASE_URL + '/genres')
         .then(response => response.json())
         .then(data => {
             const favoriteGenres = document.getElementById('favorite-genres');
@@ -77,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error populating favorite genres:', error);
         });
 
-    fetch('http://localhost:8000/types')
+    fetch(BASE_URL + '/types')
         .then(response => response.json())
         .then(data => {
             const preferredTypes = document.getElementById('preferred-types');
@@ -92,21 +88,18 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error populating preferred types:', error);
         });
 
-    // Handle max episodes slider
     const maxEpisodes = document.getElementById('max-episodes');
     const maxEpisodesValue = document.getElementById('max-episodes-value');
     maxEpisodes.addEventListener('input', function () {
         maxEpisodesValue.textContent = this.value;
     });
 
-    // Handle min rating slider
     const minRating = document.getElementById('min-rating');
     const minRatingValue = document.getElementById('min-rating-value');
     minRating.addEventListener('input', function () {
         minRatingValue.textContent = this.value;
     });
 
-    // Handle get recommendations button
     const getRecommendationsButton = document.getElementById('get-recommendations');
     getRecommendationsButton.addEventListener('click', function () {
         const favoriteGenres = Array.from(document.getElementById('favorite-genres').selectedOptions).map(option => option.value);
@@ -121,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
             min_rating: parseFloat(minRating)
         };
 
-        fetch('http://localhost:8000/initial-recommendations', {
+        fetch(BASE_URL + '/initial-recommendations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
