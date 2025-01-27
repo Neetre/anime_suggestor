@@ -21,9 +21,4 @@ cd bin
 echo "Starting Python API..."
 uvicorn api:app --host 0.0.0.0 --port 8006 &
 
-sleep 3
-
-echo "Starting Frontend..."
-streamlit run ./interface.py --server.port=8007 --server.address=0.0.0.0
-
 wait
