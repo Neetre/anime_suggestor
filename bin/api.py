@@ -1,14 +1,29 @@
-# main.py
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from typing import List, Optional
 from suggestion import AnimeRecommender
 import uvicorn
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 recommender = AnimeRecommender('../data/anime.csv', '../data/rating.csv')
 recommender.preprocess_data().train_collaborative_filtering()
 
 app = FastAPI(title="Anime Recommender API")
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class UserPreferences(BaseModel):
     favorite_genres: Optional[List[str]] = None
@@ -28,6 +43,11 @@ class UserRatings(BaseModel):
 async def startup_event():
     """Preprocessing on API startup."""
     pass
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    """Serve the main HTML page."""
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/genres")
 def get_genres():
@@ -76,7 +96,6 @@ def get_recommendations(user_id: int, method: str = "svd", n: int = 5):
             raise HTTPException(status_code=400, detail="Invalid recommendation method")
     except Exception as e:
         raise HTTPException(status_code=404, detail="User not found")
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)

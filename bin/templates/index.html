@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Recommendation System</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Anime Recommendation System</h1>
+        <div class="sidebar">
+            <select id="page-selector">
+                <option value="genres-types">Genres & Types</option>
+                <option value="starter-anime">Starter Anime</option>
+                <option value="initial-recommendations">Initial Recommendations</option>
+            </select>
+        </div>
+        <div class="main-content">
+            <div id="genres-types" class="page active">
+                <h2>Available Genres and Types</h2>
+                <div class="columns">
+                    <div class="column">
+                        <h3>Genres</h3>
+                        <p id="genres-list">Loading genres...</p>
+                    </div>
+                    <div class="column">
+                        <h3>Anime Types</h3>
+                        <p id="types-list">Loading types...</p>
+                    </div>
+                </div>
+            </div>
+            <div id="starter-anime" class="page">
+                <h2>Starter Anime Recommendations</h2>
+                <div id="starter-anime-list">Loading starter anime...</div>
+            </div>
+            <div id="initial-recommendations" class="page">
+                <h2>Initial Recommendations</h2>
+                <div class="form">
+                    <label for="favorite-genres">Favorite Genres:</label>
+                    <select id="favorite-genres" multiple></select>
+                    <label for="preferred-types">Preferred Types:</label>
+                    <select id="preferred-types" multiple></select>
+                    <label for="max-episodes">Maximum Episodes:</label>
+                    <input type="range" id="max-episodes" min="1" max="100" value="26">
+                    <span id="max-episodes-value">26</span>
+                    <label for="min-rating">Minimum Rating:</label>
+                    <input type="range" id="min-rating" min="0" max="10" step="0.5" value="7.5">
+                    <span id="min-rating-value">7.5</span>
+                    <button id="get-recommendations">Get Recommendations</button>
+                </div>
+                <div id="recommendations-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
