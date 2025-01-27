@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple anime suggestor that suggests anime based on the genre you like.
+This is a simple anime suggestor that suggests anime based on the genre you like, created using Streamlit (it's a little heavy to load, so please be patient).
 The suggestor uses a statistical model to predict the anime that you might like based on the genre you like.
 The dataset used is from the [MyAnimeList dataset](https://www.kaggle.com/azathoth42/myanimelist).
 The dataset contains information about anime such as the name, genre, rating, etc.
