@@ -58,31 +58,31 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching starter anime:', error);
         });
 
+    // Populate genres with checkboxes
     fetch(BASE_URL + '/genres')
         .then(response => response.json())
         .then(data => {
             const favoriteGenres = document.getElementById('favorite-genres');
-            data.forEach(genre => {
-                const option = document.createElement('option');
-                option.value = genre;
-                option.textContent = genre;
-                favoriteGenres.appendChild(option);
-            });
+            favoriteGenres.innerHTML = data.map(genre => `
+                <label class="checkbox-label">
+                    <input type="checkbox" value="${genre}"> ${genre}
+                </label>
+            `).join('');
         })
         .catch(error => {
             console.error('Error populating favorite genres:', error);
         });
 
+    // Populate types with checkboxes
     fetch(BASE_URL + '/types')
         .then(response => response.json())
         .then(data => {
             const preferredTypes = document.getElementById('preferred-types');
-            data.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                preferredTypes.appendChild(option);
-            });
+            preferredTypes.innerHTML = data.map(type => `
+                <label class="checkbox-label">
+                    <input type="checkbox" value="${type}"> ${type}
+                </label>
+            `).join('');
         })
         .catch(error => {
             console.error('Error populating preferred types:', error);
@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const getRecommendationsButton = document.getElementById('get-recommendations');
     getRecommendationsButton.addEventListener('click', function () {
-        const favoriteGenres = Array.from(document.getElementById('favorite-genres').selectedOptions).map(option => option.value);
-        const preferredTypes = Array.from(document.getElementById('preferred-types').selectedOptions).map(option => option.value);
+        const favoriteGenres = Array.from(document.querySelectorAll('#favorite-genres input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
+        const preferredTypes = Array.from(document.querySelectorAll('#preferred-types input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
         const maxEpisodes = document.getElementById('max-episodes').value;
         const minRating = document.getElementById('min-rating').value;
 

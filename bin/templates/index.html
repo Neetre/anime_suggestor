@@ -38,15 +38,19 @@
                 <h2>Initial Recommendations</h2>
                 <div class="form">
                     <label for="favorite-genres">Favorite Genres:</label>
-                    <select id="favorite-genres" multiple></select>
+                    <div id="favorite-genres"></div> <!-- Checkboxes will be populated here -->
+            
                     <label for="preferred-types">Preferred Types:</label>
-                    <select id="preferred-types" multiple></select>
+                    <div id="preferred-types"></div> <!-- Checkboxes will be populated here -->
+            
                     <label for="max-episodes">Maximum Episodes:</label>
                     <input type="range" id="max-episodes" min="1" max="100" value="26">
                     <span id="max-episodes-value">26</span>
+            
                     <label for="min-rating">Minimum Rating:</label>
                     <input type="range" id="min-rating" min="0" max="10" step="0.5" value="7.5">
                     <span id="min-rating-value">7.5</span>
+            
                     <button id="get-recommendations">Get Recommendations</button>
                 </div>
                 <div id="recommendations-list"></div>

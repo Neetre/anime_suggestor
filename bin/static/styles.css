@@ -132,7 +132,6 @@ button:hover {
     border-radius: 5px;
 }
 
-/* Loading Spinner */
 .loading-spinner {
     border: 4px solid #f3f3f3;
     border-top: 4px solid #007bff;
@@ -146,4 +145,33 @@ button:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.checkbox-label {
+    display: block;
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkbox-label:hover {
+    background-color: #e9ecef;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#favorite-genres, #preferred-types {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 15px;
 }
